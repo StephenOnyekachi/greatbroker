@@ -63,6 +63,7 @@ MIDDLEWARE = [
 ]
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 ROOT_URLCONF = 'BrokerProject.urls'
 
@@ -114,6 +115,9 @@ DATABASES = {
     'default': dj_database_url.config(
         default=config('DATABASE_URL')
     )
+}
+DATABASES = {
+    'default': dj_database_url.config(default=os.getenv("DATABASE_URL"))
 }
 
 # rest framework authenticatio
