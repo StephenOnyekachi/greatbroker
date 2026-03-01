@@ -1,0 +1,110 @@
+
+{% extends 'extend/base.html' %}
+{% load static %}
+{% load humanize %}
+{% block content %}
+
+<style>
+    .loanCard{
+        background:#ffffff;
+        padding:30px;
+        border-radius:15px;
+        box-shadow:0 5px 20px rgba(0,0,0,0.1);
+        width: 230px;
+    }
+    @media (max-width: 999px) {
+        .loanCard{
+            width: 100%;
+        }
+    }
+</style>
+
+    <div>
+
+        {% include 'extend/dashboardtop.html' %}
+
+        <div class="container-float">
+            
+            {% include 'extend/dashboardmenu.html' %}
+
+            <div class="three-quater">
+                <div class="main-dashboard">
+                    <div class="box">
+                        <div class="box">
+                            <h3 class="s-header">create new loans</h3>
+                            <div class="card l-bg">
+                                <form action="" method="post" enctype="multipart/form-data">
+                                    {% csrf_token %}
+                                    <div class="input">
+                                        <p class="p">amount</p>
+                                        <input type="number" placeholder="Amount" name="amount">
+                                    </div>
+                                    <div class="input">
+                                        <p class="p">name</p>
+                                        <input type="text" placeholder="Name" name="name">
+                                    </div>
+                                    <div class="input">
+                                        <p class="p">duraton</p>
+                                        <input type="text" placeholder="Duration" name="duration">
+                                    </div>
+                                    <div class="input"> 
+                                        <div class="box-float">
+                                            <button class="p-bg">create Loan</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="box">
+                            <h3 class="s-header">available loans</h3>
+                            <div class="container" style="display: flex;flex-wrap: wrap; gap: 10px;">
+                                {% if loans %}
+                                    {% for loan in loans %}
+                                    <div class="loanCard">
+                                        <!-- Status Icon -->
+                                        <div style="text-align:center; margin-bottom:20px;">
+                                            <i class="fa fa-money p-logo"></i>
+                                        </div>
+                                        <!-- Amount -->
+                                        <h2 style="text-align:center; font-size:20px; margin-bottom:5px;">
+                                            <i class="fa fa-dollar"></i>
+                                            {{ loan.amount|intcomma }}
+                                        </h2>
+                                        <hr>
+                                        <!-- Transaction Details -->
+                                        <div style="margin-top:5px; line-height:2; text-align: center;">
+                                            <p class="p">
+                                                name
+                                                <br>
+                                                <strong>{{ loan.name }}</strong>
+                                            </p>
+                                            <p class="p">
+                                                duration
+                                                <br>
+                                                <strong>{{ loan.duration }}</strong>
+                                            </p>
+                                        </div>
+                                        <div class="box-float">
+                                            <a href="{% url 'deleteLoan' loan.id %}" class="button d-bg">delete plan</a>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                {% else %}
+                                <div class="card p-bg">
+                                    <div class="kyc">
+                                        <i class="fa fa-exclamation-triangle w-logo"></i>
+                                        <p style="text-transform: capitalize;padding: 10px;">
+                                            there is no loans plans
+                                        </p>
+                                    </div>
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

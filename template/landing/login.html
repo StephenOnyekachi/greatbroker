@@ -1,0 +1,67 @@
+
+{% extends 'extend/base.html' %}
+{% load static %}
+{% block content %}
+
+{% include 'extend/indexmenu.html' %}
+
+<div>
+    <section>
+        <div class="home-intro">
+            <div class="home-intro-box">
+                <h1>Welcome Back</h1>
+                <p>
+                    securely access your account
+                </p>
+                <br>
+                <img src="{% static './images/add.png' %}" alt="image">
+            </div>
+            <div class="home-intro-box">
+                <div class="auths-card">
+                    <div>
+                        {% if messages %}
+                            {% for message in messages %}
+                                <div class="info-m">
+                                    <h5>Info</h5>
+                                    <p>{{ message }}</p>
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                        <form action="" method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div>
+                                <div class="form-text">
+                                    <p>Username</p>
+                                </div>
+                                <div class="form-div">
+                                    <input type="text" placeholder="Enter Your Username" name="username">
+                                    <i class="fa fa-user"></i>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="form-text">
+                                    <p>Password</p>
+                                </div>
+                                <div class="form-div">
+                                    <input type="password" placeholder="Enter Your Password" name="password" class="pass">
+                                    <i class="fa fa-eye toggle"></i>
+                                </div>
+                            </div>
+                            <div>
+                                <button>log in</button>
+                            </div>
+                            <div class="form-ex">
+                                <p class="warn-p">Forgotten Password <a href="">Rest Password</a></p>
+                                <p class="ligh-p">Create new accout <a href="{% url 'signup' %}">Create New Accout</a></p>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+{% include 'extend/footer.html' %}
+
+{% endblock %}

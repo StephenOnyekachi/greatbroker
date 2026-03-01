@@ -1,0 +1,107 @@
+
+{% extends 'extend/base.html' %}
+{% load static %}
+{% block content %}
+
+{% include 'extend/indexmenu.html' %}
+
+<div>
+    <section>
+        <div class="home-intro">
+            <div class="home-intro-box">
+                <h1>Create Your Account</h1>
+                <p>
+                    Join Great Broker today
+                </p>
+                <br>
+                <img src="{% static './images/add.png' %}" alt="image">
+            </div>
+            <div class="home-intro-box">
+                <div class="auths-card">
+                    <div>
+                        {% if messages %}
+                            {% for message in messages %}
+                                <div class="info-m">
+                                    <h5>info</h5>
+                                    <p>{{ message }}</p>
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                        <form action="" method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="form-flex">
+                                <div class="form-flex-box">
+                                    <div class="form-text">
+                                        <p>Username</p>
+                                    </div>
+                                    <div class="form-div">
+                                        <input type="text" placeholder="Username" name="username">
+                                        <i class="fa fa-user"></i>
+                                    </div>
+                                </div>
+                                <div class="form-flex-box">
+                                    <div class="form-text">
+                                        <p>First Name</p>
+                                    </div>
+                                    <div class="form-div">
+                                        <input type="text" placeholder="First Name" name="first_name">
+                                        <i class="fa fa-user"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-flex">
+                                <div class="form-flex-box">
+                                    <div class="form-text">
+                                        <p>Other Names</p>
+                                    </div>
+                                    <div class="form-div">
+                                        <input type="text" placeholder="Other Names" name="last_name">
+                                        <i class="fa fa-user"></i>
+                                    </div>
+                                </div>
+                                <div class="form-flex-box">
+                                    <div class="form-text">
+                                        <p>Email</p>
+                                    </div>
+                                    <div class="form-div">
+                                        <input type="text" placeholder="Mail" name="mail">
+                                        <i class="fa fa-envelope"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-flex">
+                                <div class="form-flex-box">
+                                    <div class="form-text">
+                                        <p>Password</p>
+                                    </div>
+                                    <div class="form-div">
+                                        <input type="password" placeholder="Create Password" class="pass" name="password1">
+                                        <i class="fa fa-eye toggle"></i>
+                                    </div>
+                                </div>
+                                <div class="form-flex-box">
+                                    <div class="form-text">
+                                        <p>Confirm Password</p>
+                                    </div>
+                                    <div class="form-div">
+                                        <input type="password" placeholder="Confirm Password" class="pass" name="password2">
+                                        <i class="fa fa-eye toggle"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <button>Sign Up</button>
+                            </div>
+                            <div class="form-ex">
+                                <p class="ligh-p">Have an accout <a href="{% url 'login' %}">Login Here</a></p>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+{% include 'extend/footer.html' %}
+
+{% endblock %}

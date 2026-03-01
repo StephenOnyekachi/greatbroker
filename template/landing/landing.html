@@ -1,0 +1,152 @@
+
+{% extends 'extend/base.html' %}
+{% load static %}
+{% block content %}
+
+{% include 'extend/indexmenu.html' %}
+
+<div>
+    <section>
+        <div class="home-intro">
+            <div class="home-intro-box">
+                <h1>great broker, Smart Investing. Secure Transactions. Real Growth.</h1>
+                <p>
+                    GreatBroker is a modern financial platform that helps individuals grow their money,
+                    manage digital transactions, and invest securely from anywhere in the world.
+                </p>
+                <br>
+                <p>
+                    Send money, invest in opportunities, track your transactions, and manage your wallet
+                    all in one secure platform designed for speed, reliability, and transparency.
+                </p>
+                <div style="margin-top: 20px;">
+                    <a href="{% url 'login' %}" class="achor-active"> Get Started</a>
+                    <a href="{% url 'signup' %}" class="achor-border"> Login to Dashboard</a>
+                </div>
+            </div>
+            <div class="home-intro-box">
+                <img src="{% static './images/hero-img.png' %}" alt="image">
+            </div>
+        </div>
+        <div class="home-intro-icon zoom-in">
+            <div class="home-intro-icon-box">
+                <img src="{% static './images/wallet.png' %}" alt="image" class="img-icon">
+                <h3>Fast & Secure</h3>
+            </div>
+            <div class="home-intro-icon-box">
+                <img src="{% static './images/clock.png' %}" alt="image" class="img-icon">
+                <h3>Real-Time Data</h3>
+            </div>
+            <div class="home-intro-icon-box">
+                <img src="{% static './images/dollar-bag.png' %}" alt="image" class="img-icon">
+                <h3>Grow Your Wealth</h3>
+            </div>
+        </div>
+    </section>
+    <section>
+        <div class="home-about">
+            <div class="home-about-box zoom-in">
+                <h1>About Great Broker</h1>
+                <h3>
+                    Your Gateway to Smart Trading
+                </h3>
+
+                <p>
+                    We provide a modern, intutive platform to help your
+                    succeed in the finacial markets.
+                </p>
+            </div>
+            <div class="home-about-box zoom-in">
+                <img src="{% static './images/up.png' %}" alt="image">
+            </div>
+        </div>
+        <div class="home-why-us-title">
+            <h3>Why Choose Us?</h3>
+        </div>
+        <div class="home-why-us-box">
+            <div class="home-why-us-card zoom-in">
+                <div class="home-why-us-head">
+                    <img src="{% static './images/security.png' %}" alt="image" class="img-icon">
+                    <h3>Secure Platform</h3>
+                </div>
+                <div class="home-why-us-text">
+                    <hr>
+                    <p>
+                        We prond secure to divencing and accourity and bia merts.
+                    </p>
+                </div>
+            </div>
+            <div class="home-why-us-card zoom-in">
+                <div class="home-why-us-head">
+                    <img src="{% static './images/msystem.png' %}" alt="image" class="img-icon">
+                    <h3>Advanced Tools</h3>
+                </div>
+                <div class="home-why-us-text">
+                    <hr>
+                    <p>
+                        Design an experence that tranding the storded.
+                    </p>
+                </div>
+            </div>
+            <div class="home-why-us-card zoom-in">
+                <div class="home-why-us-head">
+                    <img src="{% static './images/wechat.png' %}" alt="image" class="img-icon">
+                    <h3>24/7 Support</h3>
+                </div>
+                <div class="home-why-us-text">
+                    <hr>
+                    <p>
+                        Support center and change trading updates.
+                    </p>
+                </div>
+            </div>
+            <div class="home-why-us-card zoom-in">
+                <div class="home-why-us-head">
+                    <img src="{% static './images/connected.png' %}" alt="image" class="img-icon">
+                    <h3>Easy to Use</h3>
+                </div>
+                <div class="home-why-us-text">
+                    <hr>
+                    <p>
+                        Expertinests and prool active team conces and testur.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section>
+        <div class="home-our-user">
+            <div class="home-our-user-title">
+                <h3>What Out User Says?</h3>
+            </div>
+            <div class="home-our-user-box">
+                <div class="home-our-user-card zoom-in">
+                    <div class="home-our-user-card-con">
+                        <img src="{% static './images/user1.jpg' %}" alt="image" class="user-img">
+                    </div>
+                    <div class="home-our-user-card-con">
+                        <p>
+                            We prond secure to divencing and accourity and bia merts.
+                        </p>
+                        <h3>Michael A</h3>
+                    </div>
+                </div>
+                <div class="home-our-user-card zoom-in">
+                    <div class="home-our-user-card-con">
+                        <img src="{% static './images/user2.jpg' %}" alt="image" class="user-img">
+                    </div>
+                    <div class="home-our-user-card-con">
+                        <p>
+                            We prond secure to divencing and accourity and bia merts.
+                        </p>
+                        <h3>Sarah T</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+{% include 'extend/footer.html' %}
+
+{% endblock %}

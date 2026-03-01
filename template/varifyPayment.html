@@ -1,0 +1,83 @@
+
+{% extends 'extend/base.html' %}
+{% load static %}
+{% load humanize %}
+{% block content %}
+
+    <div>
+
+        {% include 'extend/dashboardtop.html' %}
+
+        <div class="container-float">
+            
+            {% include 'extend/dashboardmenu.html' %}
+
+            <div class="three-quater">
+                <div class="main-dashboard">
+                    <div class="box">
+                        <div class="box">
+                            <p class="p">
+                                Account No
+                            </p>
+                            <p class="p-u">
+                                {{ account_number }}
+                            </p>
+                            <h3 class="s-header">withdrawal</h3>
+                        </div>
+                        <div class="card l-bg">
+                            <i class="fa fa-university opacity-logo"></i>
+                            <p class="p">
+                                balance
+                            </p>
+                            <h3 class="b-header">
+                                <i class="fa fa-dollar"></i>
+                                {{ balance }}
+                            </h3>
+                        </div>
+                        <div class="box">
+                            <h3 class="s-header">preview receiver details</h3>
+                            <div class="card l-bg">
+                                <div class="box">
+                                    <p class="p">receiver name</p>
+                                    <h3 class="s-header">
+                                        {{ reciever.user.first_name }} {{ reciever.user.last_name }}
+                                    </h3>
+                                    <p class="p">receiver account no</p>
+                                    <h3 class="s-header">
+                                        {{ account }}
+                                    </h3>
+                                </div>
+                                <form action="" method="post" enctype="multipart/form-data">
+                                    {% csrf_token %}
+                                    <div class="input">
+                                        <p class="p">amount</p>
+                                        <input type="text" value="{{ account }}" name="account" hidden>
+                                    </div>
+                                    <div class="input">
+                                        <input type="number" placeholder="Amount" name="amount">
+                                    </div>
+                                    <div class="input">
+                                        <p class="p">description</p>
+                                        <textarea name="description" id="" placeholder="Description"></textarea>
+                                    </div>
+                                    <div class="input">
+                                        <p class="p">pin</p>
+                                        <input type="number" placeholder="Enter Your Transaction Pin" name="pin">
+                                    </div>
+                                    <div class="input"> 
+                                        <div class="box-float">
+                                            <button class="p-bg">confirm payment</button>
+                                            <!-- <button class="p-bg" id="confirm">confirm</button> -->
+                                            <a href="{% url 'withdraw' %}" class="button d-bg">cancle payment</a>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

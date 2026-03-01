@@ -1,0 +1,196 @@
+
+{% extends 'extend/base.html' %}
+{% load static %}
+{% load humanize %}
+{% block content %}
+
+    <div>
+        
+        {% include 'extend/dashboardtop.html' %}
+
+        <div class="container-float">
+            
+            {% include 'extend/dashboardmenu.html' %}
+
+            <div class="three-quater">
+                <div class="main-dashboard">
+                    <div class="box">
+                        <div class="box-float">
+                            <div class="box">
+                                <p class="p">
+                                    Account No
+                                </p>
+                                <p class="p-u">
+                                    {{ accountNo }}
+                                </p>
+                            </div>
+                            <div class="box">
+                                <p class="p">
+                                    balance
+                                </p>
+                                <h3 class="s-header">
+                                    <i class="fa fa-dollar"></i>
+                                    {{ balance|intcomma }}
+                                </h3>
+                            </div>
+                        </div>
+                        <div class="box-float">
+                            <div class="box">
+                                <p class="p">
+                                    username
+                                </p>
+                                <p class="">
+                                    {{ useraccount.username }}
+                                </p>
+                            </div>
+                            <div class="box">
+                                <p class="p">
+                                    other names
+                                </p>
+                                <p class="p">
+                                    {{ useraccount.first_name }} {{ useraccount.last_name }}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="box-float">
+                            <div class="box">
+                                <p class="p">
+                                    password
+                                </p>
+                                <p class="">
+                                    {{ profile.info }}
+                                </p>
+                            </div>
+                            <div class="box">
+                                <p class="p">
+                                    profile picture
+                                </p>
+                                {% if profile.profile_picture %}
+                                <a href="{{ profile.profile_picture.url }}">
+                                    <img src="{{ profile.profile_picture.url }}" alt="profile picture" width="100">
+                                </a>
+                                {% else %}
+                                    <img src="{% static './images/user_icon.png' %}" alt="">
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="box-float">
+                            <div class="box">
+                                <p class="p">
+                                    user loans
+                                </p>
+                                <div style="padding: 10px 0px; display: flex; flex-wrap: wrap;">
+                                    <a href="{% url 'viewUserLoan' useraccount.id %}" class="button p-bg">view loans</a>
+                                </div>
+                            </div>
+                            <div class="box">
+                                <p class="p">
+                                    user investments
+                                </p>
+                                <div style="padding: 10px 0px; display: flex; flex-wrap: wrap;">
+                                    <a href="{% url 'viewUserInvestment' useraccount.id %}" class="button p-bg">view investments</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="box">
+                            <h3 class="s-header">Settings</h3>
+                        </div>
+                        <div class="card l-bg">
+                            <div class="box-float">
+                                <div class="box">
+                                    <i class="fa fa-money p-logo"></i>
+                                    <p class="p">
+                                        edit user balance
+                                    </p>
+                                    <button class="s-button p-bg" id="userBalance">procced</button>
+                                </div>
+                                <div class="box">
+                                    <i class="fa fa-lock p-logo"></i>
+                                    {% if profile.block %}
+                                    <p class="p">
+                                        profile is block
+                                    </p>
+                                    <div style="padding: 10px 0px; display: flex; flex-wrap: wrap;">
+                                        <a href="{% url 'blockUser' profile.user.id %}" class="button p-bg">unblock profile</a>
+                                    </div>
+                                    {% else %}
+                                    <p class="p">
+                                        profile is open
+                                    </p>
+                                    <div style="padding: 10px 0px; display: flex; flex-wrap: wrap;">
+                                        <a href="{% url 'blockUser' profile.user.id %}" class="button d-bg">block profile</a>
+                                    </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="box-float">
+                                <div class="box">
+                                    <i class="fa fa-dollar p-logo"></i>
+                                    <p class="p">
+                                        create new transaction history
+                                    </p>
+                                    <div style="padding: 10px 0px; display: flex; flex-wrap: wrap;">
+                                        <a href="{% url 'createTransactions' profile.user.id %}" class="button p-bg">procced</a>
+                                    </div>
+                                </div>
+                                <div class="box">
+                                    <i class="fa fa-exchange p-logo"></i>
+                                    <p class="p">
+                                        delete all old transaction histories
+                                    </p>
+                                    <i class="p">total transactions {{ transaction.count }}</i>
+                                    <div style="padding: 10px 0px; display: flex; flex-wrap: wrap;">
+                                        <a href="{% url 'deleteTransactions' profile.user.id %}" class="button d-bg">delete all</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="box-float">
+                                <div class="box">
+                                    <i class="fa fa-key p-logo"></i>
+                                    {% if profile.user.is_superuser %}
+                                    <p class="p">
+                                        profile is admin
+                                    </p>
+                                    <div style="padding: 10px 0px; display: flex; flex-wrap: wrap;">
+                                        <a href="{% url 'makeAdmin' profile.user.id %}" class="button p-bg">unadmin user</a>
+                                    </div>
+                                    {% else %}
+                                    <p class="p">
+                                        profile is not admin
+                                    </p>
+                                    <div style="padding: 10px 0px; display: flex; flex-wrap: wrap;">
+                                        <a href="{% url 'makeAdmin' profile.user.id %}" class="button d-bg">make admin</a>
+                                    </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="varify-cover">
+                <div class="varify-card">
+                    <div id="balance">
+                        <form action="{% url 'picture' %}" method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div>
+                                <div class="input">
+                                    <p class="l-p" style="text-align: left;">enter amount to be added</p>
+                                    <input type="number" id="amount" name="balance">
+                                </div>
+                                <div class="input">
+                                    <div class="box-float">
+                                        <button class="s-bg">save changes</button>
+                                        <a href="{% url 'viewUser' useraccount.id %}" class="button p-bg">back</a>
+                                        <a href="{% url 'setting' %}" class="button d-bg">set to 0</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

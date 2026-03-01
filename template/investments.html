@@ -1,0 +1,124 @@
+
+{% extends 'extend/base.html' %}
+{% load static %}
+{% load humanize %}
+{% block content %}
+
+<style>
+    .loanCard{
+        background:#ffffff;
+        padding:30px;
+        border-radius:15px;
+        box-shadow:0 5px 20px rgba(0,0,0,0.1);
+        width: 210px;
+    }
+    @media (max-width: 999px) {
+        .loanCard{
+            width: 100%;
+        }
+    }
+</style>
+
+    <div>
+
+        {% include 'extend/dashboardtop.html' %}
+
+        <div class="container-float">
+            
+            {% include 'extend/dashboardmenu.html' %}
+
+            <div class="three-quater">
+                <div class="main-dashboard">
+                    <div class="box">
+                        <div class="box">
+                            <p class="p">
+                                Account No
+                            </p>
+                            <p class="p-u">
+                                {{ account_number }}
+                            </p>
+                            <h3 class="s-header">withdrawal</h3>
+                        </div>
+                        <div class="card l-bg">
+                            <i class="fa fa-university opacity-logo"></i>
+                            <p class="p">
+                                balance
+                            </p>
+                            <h3 class="b-header">
+                                <i class="fa fa-dollar"></i>
+                                {{ balance }}
+                            </h3>
+                        </div>
+                        <div class="box-float">
+                            <div class="card p-bg">
+                                <i class="fa fa-university opacity-logo"></i>
+                                <i class="fa fa-money p-logo"></i>
+                                <p class="p">
+                                    total investments
+                                </p>
+                                <h3 class="b-header">
+                                    <i class="fa fa-dollar"></i>
+                                    {{ total_invest|intcomma }}
+                                </h3>
+                            </div>
+                        </div>
+                        <div class="box">
+                            <h3 class="s-header">available investments</h3>
+                            <div class="container" style="display: flex;flex-wrap: wrap; gap: 10px;">
+                                {% if investments %}
+                                    {% for investment in investments %}
+                                    <div class="loanCard">
+                                        <!-- Status Icon -->
+                                        <div style="text-align:center; margin-bottom:20px;">
+                                            <i class="fa fa-money p-logo"></i>
+                                        </div>
+                                        <!-- Amount -->
+                                        <h2 style="text-align:center; font-size:20px; margin-bottom:5px;">
+                                            <i class="fa fa-dollar"></i>
+                                            {{ investment.amount|intcomma }}
+                                        </h2>
+                                        <hr>
+                                        <!-- Transaction Details -->
+                                        <div style="margin-top:5px; line-height:2; text-align: center;">
+                                            <p class="p">
+                                                name
+                                                <br>
+                                                <strong>{{ investment.name }}</strong>
+                                            </p>
+                                            <p class="p">
+                                                <strong>{{ investment.interest }}</strong>
+                                                percentage
+                                            </p>
+                                            <p class="p">
+                                                duration
+                                                <strong>{{ investment.duration }} days</strong>
+                                            </p>
+                                        </div>
+                                        <hr style="margin:20px 0;">
+                                        <!-- Back Button -->
+                                        <form action="" method="post" enctype="multipart/form-data">
+                                            {% csrf_token %}
+                                            <div class="input">
+                                                <input type="number" value="{{ investment.id }}" name="investment" hidden>
+                                                <input type="number" value="{{ investment.amount }}" name="amount" hidden>
+                                                <input type="number" value="{{ investment.interest }}" name="interest" hidden>
+                                                <input type="number" value="{{ investment.duration }}" name="due_on" hidden>
+                                            </div>
+                                            <div class="input">
+                                                <div class="box-float">
+                                                    <button class="p-bg">invest now</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

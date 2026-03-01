@@ -1,0 +1,145 @@
+
+{% extends 'extend/base.html' %}
+{% load static %}
+{% block content %}
+
+    <div>
+        
+        {% include 'extend/dashboardtop.html' %}
+
+        <div class="container-float">
+            
+            {% include 'extend/dashboardmenu.html' %}
+
+            <div class="three-quater">
+                <div class="main-dashboard">
+                    <div class="box">
+                        <div class="box">
+                            <p class="p">
+                                Account No
+                            </p>
+                            <p class="p-u">
+                                {{ account_number }}
+                            </p>
+                        </div>
+                        <div class="box-float">
+                            <div class="box">
+                                <p class="p">
+                                    username
+                                </p>
+                                <p class="p-u">
+                                    {{ user.username }}
+                                </p>
+                            </div>
+                            <div class="box">
+                                <p class="p">
+                                    names
+                                </p>
+                                <p class="p-u">
+                                    {{ user.first_name }} {{ user.last_name }}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="box">
+                            <h3 class="s-header">create new loans</h3>
+                            <div class="card l-bg">
+                                <form action="" method="post" enctype="multipart/form-data">
+                                    {% csrf_token %}
+                                    <div class="input">
+                                        <p class="p">old password</p>
+                                        <input type="text" placeholder="Old Password" name="opass">
+                                    </div>
+                                    <div class="input">
+                                        <p class="p">new password</p>
+                                        <input type="text" placeholder="New Password" name="npass">
+                                    </div>
+                                    <div class="input">
+                                        <p class="p">confirm new password</p>
+                                        <input type="text" placeholder="Confirm New Password" name="cnpass">
+                                    </div>
+
+                                    <div class="input"> 
+                                        <div class="box-float">
+                                            <button class="p-bg">save changes</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="varify-cover">
+                <div class="varify-card">
+                    <div id="profile">
+                        <form action="{% url 'picture' %}" method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div>
+                                <div class="input">
+                                    <p class="l-p" style="text-align: left;">updated profile piture</p>
+                                    <label for="profilePicture">
+                                        <i class="fa fa-camera p-logo"></i>
+                                    </label>
+                                    <input type="file" id="profilePicture" hidden name="profilePicture">
+                                </div>
+                                <div class="input">
+                                    <div class="box-float">
+                                        <button class="s-bg">save changes</button>
+                                        <a href="{% url 'setting' %}" class="button d-bg">cancle</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div id="pin">
+                        <form action="{% url 'pin' %}" method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div>
+                                <div class="input">
+                                    <p class="l-p" style="text-align: left;">password</p>
+                                    <input type="text" placeholder="Password" name="pass">
+                                </div>
+                                <div class="input">
+                                    <p class="l-p" style="text-align: left;">new pin</p>
+                                    <input type="number" placeholder="New Pin" name="npin">
+                                </div>
+                                <div class="input">
+                                    <div class="box-float">
+                                        <button class="s-bg">save changes</button>
+                                        <a href="{% url 'setting' %}" class="button d-bg">cancle</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div id="password">
+                        <form action="{% url 'password' %}" method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div>
+                                <div class="input">
+                                    <p class="l-p" style="text-align: left;">old password</p>
+                                    <input type="text" placeholder="Old Password" name="opass">
+                                </div>
+                                <div class="input">
+                                    <p class="l-p" style="text-align: left;">new password</p>
+                                    <input type="text" placeholder="New Password" name="npass">
+                                </div>
+                                <div class="input">
+                                    <p class="l-p" style="text-align: left;">confirm new password</p>
+                                    <input type="text" placeholder="Confirm New Password" name="cnpass">
+                                </div>
+                                <div class="input">
+                                    <div class="box-float">
+                                        <button class="s-bg">save changes</button>
+                                        <a href="{% url 'setting' %}" class="button d-bg">cancle</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

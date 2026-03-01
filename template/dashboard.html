@@ -1,0 +1,123 @@
+
+{% extends 'extend/base.html' %}
+{% load static %}
+{% load humanize %}
+{% block content %}
+
+    <div>
+        
+        {% include 'extend/dashboardtop.html' %}
+
+        <div class="container-float">
+            
+            {% include 'extend/dashboardmenu.html' %}
+
+            <div class="three-quater">
+                <div class="main-dashboard">
+                    <div class="box">
+                        <div class="box">
+                            <p class="p">
+                                Account No
+                            </p>
+                            <p class="p-u">
+                                {{ account_number }}
+                            </p>
+                            <h3 class="s-header">dashboard</h3>
+                        </div>
+                        <div class="card l-bg">
+                            <i class="fa fa-university opacity-logo"></i>
+                            <p class="p">
+                                balance
+                            </p>
+                            <h3 class="b-header">
+                                <i class="fa fa-dollar"></i>
+                                {{ balance }}
+                            </h3>
+                        </div>
+                        <div class="box-float">
+                            <div class="card p-bg">
+                                <i class="fa fa-university opacity-logo"></i>
+                                <i class="fa fa-credit-card p-logo"></i>
+                                <p class="p">
+                                    investments
+                                </p>
+                                <h3 class="b-header">
+                                    <i class="fa fa-dollar"></i>
+                                    {% if investment %} {{ total_investment }} {% else %} 0.0 {% endif %}
+                                </h3>
+                            </div>
+                            <div class="card p-bg">
+                                <i class="fa fa-university opacity-logo"></i>
+                                <i class="fa fa-money p-logo"></i>
+                                <p class="p">
+                                    investment percent
+                                </p>
+                                <h3 class="b-header">
+                                    <i class="fa fa-dollar"></i>
+                                    {% if investment %} {{ investment_per }} {% else %} 0.0 {% endif %}
+                                </h3>
+                            </div>
+                        </div>
+                        <div class="box">
+                            <h3 class="s-header">resent transaction histories</h3>
+                            {% if transactions %}
+                                {% for transaction in transactions %}
+                                <a href="{% url 'transactionDetail' transaction.id %}" style="text-decoration:none; color:inherit;">
+                                    <div class="card l-bg">
+                                        <i class="fa fa-university opacity-logo"></i>
+                                        {% if transaction.receiver == user %}
+                                            {% if transaction.status == 'Success' %}
+                                            <i class="fa fa-arrow-down s-logo"></i>
+                                            {% else %}
+                                            <i class="fa fa-arrow-down w-logo"></i>
+                                            {% endif %}
+                                            <p class="p s-t">
+                                                deposit from {{ transaction.receiver.first_name }}
+                                            </p>
+                                        {% elif transaction.sender == user %}
+                                            {% if transaction.status == 'Success' %}
+                                            <i class="fa fa-arrow-up s-logo"></i>
+                                            {% else %}
+                                            <i class="fa fa-arrow-up w-logo"></i>
+                                            {% endif %}
+                                            <p class="p">
+                                                withdraw from {{ transaction.sender.first_name }}
+                                            </p>
+                                        {% endif %}
+                                        <p class="p s-t">
+                                            status:
+                                            {% if transaction.status == 'Success' %}
+                                            <i class="s-t-c">{{ transaction.status }}</i>
+                                            {% else %}
+                                            <i class="w-t-c">{{ transaction.status }}</i>
+                                            {% endif %}
+                                        </p>
+                                        <h3 class="s-header">
+                                            <i class="fa fa-dollar"></i>
+                                            {{ transaction.amount|intcomma }}
+                                        </h3>
+                                        <p class="p s-t">date: <i>{{ transaction.created_at }}</i></p>
+                                    </div>
+                                </a>
+                                {% endfor %}
+                            {% else %}
+                            <div class="card p-bg">
+                                <div class="kyc">
+                                    <i class="fa fa-check s-logo"></i>
+                                    <p style="text-transform: capitalize;padding: 10px;">
+                                        {{ user.first_name }} {{ user.last_name }}
+                                    </p>
+                                    <p style="text-transform: capitalize;padding: 10px;">
+                                        you do not have any transaction history
+                                    </p>
+                                </div>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

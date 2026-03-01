@@ -1,0 +1,44 @@
+
+{% extends 'extend/base.html' %}
+{% load static %}
+{% block content %}
+
+{% include 'extend/indexmenu.html' %}
+<div>
+    <section>
+        <div class="home-intro-icon">
+            <div class="home-intro-icon-box">
+                <h3>1,000+</h3>
+                <p>Active Investors</p>
+            </div>
+            <div class="home-intro-icon-box">
+                <h3>500+</h3>
+                <p>Trusted Partners</p>
+            </div>
+        </div>
+    </section>
+    <section>
+        <div class="home-about">
+            <div class="home-about-box">
+                <h1>Contact Great Broker</h1>
+                <h3>
+                    +1 000 039 3453
+                </h3>
+                <h3>
+                    support@greatbroker.com
+                </h3>
+                <p>
+                    Our platform helps investors grow their assets through 
+                    smart financial strategies and secure investment tools.
+                </p>
+            </div>
+            <div class="home-about-box">
+                <img src="{% static './images/teacher.jpg' %}" alt="image">
+            </div>
+        </div>
+    </section>
+</div>
+
+{% include 'extend/footer.html' %}
+
+{% endblock %}

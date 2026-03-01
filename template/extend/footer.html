@@ -1,0 +1,41 @@
+
+{% load static %}
+
+<section>
+    <br>
+    <div class="home-get-started-title">
+        <h3>Get Started Today</h3>
+    </div>
+    <div class="home-get-started-box">
+        <div class="home-get-started-text">
+            <p>
+                We prond secure to divencing and accourity and bia merts.
+            </p>
+        </div>
+        {% if request.path == '/login/' %}
+        {% elif request.path == '/signup/' %}
+        {% else %}
+        <div style="margin-top: 20px; margin-bottom: 20px;">
+            <a href="{% url 'login' %}" class="achor-active"> Get Started</a>
+            <a href="{% url 'signup' %}" class="achor-light"> Login to Dashboard</a>
+        </div>
+        {% endif %}
+    </div>
+    <div class="home-end">
+        <div class="home-end-box">
+            <p>
+                &copy;
+                <script>
+                    document.write(new Date().getFullYear())
+                </script> 
+                Great Broker. All rights reserved
+            </p>
+        </div>
+        <div class="home-end-box">
+            <p>
+                support@greatbroker.com | +1 000 039 3453
+            </p>
+        </div>
+    </div>
+</section>
+

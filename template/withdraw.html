@@ -1,0 +1,83 @@
+
+{% extends 'extend/base.html' %}
+{% load static %}
+{% load humanize %}
+{% block content %}
+
+    <div>
+
+        {% include 'extend/dashboardtop.html' %}
+
+        <div class="container-float">
+            
+            {% include 'extend/dashboardmenu.html' %}
+
+            <div class="three-quater">
+                <div class="main-dashboard">
+                    <div class="box">
+                        <div class="box">
+                            <p class="p">
+                                Account No
+                            </p>
+                            <p class="p-u">
+                                {{ account_number }}
+                            </p>
+                            <h3 class="s-header">withdrawal</h3>
+                        </div>
+                        <div class="card l-bg">
+                            <i class="fa fa-university opacity-logo"></i>
+                            <p class="p">
+                                balance
+                            </p>
+                            <h3 class="b-header">
+                                <i class="fa fa-dollar"></i>
+                                {{ balance }}
+                            </h3>
+                        </div>
+                        <div class="box-float">
+                            <div class="card p-bg">
+                                <i class="fa fa-university opacity-logo"></i>
+                                <i class="fa fa-credit-card p-logo"></i>
+                                <p class="p">
+                                    investments
+                                </p>
+                                <h3 class="b-header">
+                                    <i class="fa fa-dollar"></i>
+                                    {% if investment %} {{ total_investment }} {% else %} 0.0 {% endif %}
+                                </h3>
+                            </div>
+                            <div class="card p-bg">
+                                <i class="fa fa-university opacity-logo"></i>
+                                <i class="fa fa-money p-logo"></i>
+                                <p class="p">
+                                    investment percent
+                                </p>
+                                <h3 class="b-header">
+                                    <i class="fa fa-dollar"></i>
+                                    {% if investment %} {{ investment_per }} {% else %} 0.0 {% endif %}
+                                </h3>
+                            </div>
+                        </div>
+                        <div class="box">
+                            <h3 class="s-header">receiver details</h3>
+                            <div class="card l-bg">
+                                <form action="" method="post" enctype="multipart/form-data">
+                                    {% csrf_token %}
+                                    <div class="input">
+                                        <input type="text" placeholder="Account No" name="account">
+                                    </div>
+                                    <div class="input">
+                                        <div class="box-float">
+                                            <button class="p-bg">check account</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

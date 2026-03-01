@@ -1,0 +1,32 @@
+
+{% extends 'extend/base.html' %}
+{% load static %}
+{% block content %}
+
+{% include 'extend/indexmenu.html' %}
+<div>
+    <section>
+        <div class="home-about">
+            <div class="home-about-box">
+                <h1>About Great Broker</h1>
+                <h3>
+                    Your Gateway to Smart Trading
+                </h3>
+                <p>
+                    GreatBroker is a digital financial platform built to simplify investing, 
+                    payments, and financial growth. Our mission is to provide secure, transparent, 
+                    and fast financial services to users around the world.
+                    With advanced technology and strong security practices, we ensure that every 
+                    transaction and investment is protected. Our platform allows users to manage their finances confidently.
+                </p>
+            </div>
+            <div class="home-about-box">
+                <img src="{% static './images/exchange.png' %}" alt="image">
+            </div>
+        </div>
+    </section>
+</div>
+
+{% include 'extend/footer.html' %}
+
+{% endblock %}

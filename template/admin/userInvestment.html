@@ -1,0 +1,113 @@
+
+{% extends 'extend/base.html' %}
+{% load static %}
+{% load humanize %}
+{% block content %}
+
+    <div>
+        
+        {% include 'extend/dashboardtop.html' %}
+
+        <div class="container-float">
+            
+            {% include 'extend/dashboardmenu.html' %}
+
+            <div class="three-quater">
+                <div class="main-dashboard">
+                    <div class="box">
+                        <div class="box">
+                            <p class="p">
+                                Account No
+                            </p>
+                            <p class="p-u">
+                                {{ account_number }}
+                            </p>
+                            <h3 class="s-header">withdrawal</h3>
+                        </div>
+                        <div class="card l-bg">
+                            <i class="fa fa-university opacity-logo"></i>
+                            <p class="p">
+                                balance
+                            </p>
+                            <h3 class="b-header">
+                                <i class="fa fa-dollar"></i>
+                                {{ balance }}
+                            </h3>
+                        </div>
+                        <div class="box-float">
+                            <div class="card p-bg">
+                                <i class="fa fa-university opacity-logo"></i>
+                                <i class="fa fa-credit-card p-logo"></i>
+                                <p class="p">
+                                    investments
+                                </p>
+                                <h3 class="b-header">
+                                    <i class="fa fa-dollar"></i>
+                                    {% if investment %} {{ total_investment|intcomma }} {% else %} 0.0 {% endif %}
+                                </h3>
+                            </div>
+                            <div class="card p-bg">
+                                <i class="fa fa-university opacity-logo"></i>
+                                <i class="fa fa-money p-logo"></i>
+                                <p class="p">
+                                    investment percent
+                                </p>
+                                <h3 class="b-header">
+                                    <i class="fa fa-dollar"></i>
+                                    {% if investment %} {{ investment_per }} {% else %} 0.0 {% endif %}
+                                </h3>
+                            </div>
+                        </div>
+                        <div class="box">
+                            <h3 class="s-header">my investment history</h3>
+                            {% if investment %}
+                                {% for investment in investment %}
+                                <div class="card l-bg">
+                                    <i class="fa fa-university opacity-logo"></i>
+                                    <i class="fa fa-money s-logo"></i>
+                                    <p class="p">
+                                        investment from {{ investment.investor.first_name }} {{ investment.investor.last_name }}
+                                    </p>
+                                    <h3 class="s-header">
+                                        <i class="fa fa-dollar"></i>
+                                        {{ investment.amount }}
+                                    </h3>
+                                    <p class="p s-t">
+                                        investment status:
+                                        {% if investment.due == False %}
+                                        <i class="s-t-c"> on going</i>
+                                        {% else %}
+                                        <i class="w-t-c"> is due</i>
+                                        {% endif %}
+                                    </p>
+                                    <p class="p s-t">invested on: <i>{{ investment.invested_on }}</i></p>
+                                    <p class="p s-t">due on: <i>{{ investment.due_on }} </i> days time, counted days <i> {{ investment.days_count }}
+                                    {% if investment.due == False %}
+                                    <div style="padding: 10px 0px;">
+                                        <a href="{% url 'releaseInvestment' investment.id %}" class="button p-bg">release investment</a>
+                                        <a href="{% url 'addPercent' investment.id %}" class="button d-bg">add investment percent</a>
+                                    </div>
+                                    {% endif %}
+                                </div>
+                                {% endfor %}
+                            {% else %}
+                            <div class="card p-bg">
+                                <div class="kyc">
+                                    <i class="fa fa-exclamation-triangle w-logo"></i>
+                                    <p style="text-transform: capitalize;padding: 10px;">
+                                        {{ user.first_name }} {{ user.last_name }}
+                                    </p>
+                                    <p style="text-transform: capitalize;padding: 10px;">
+                                        you do not have any investment history
+                                    </p>
+                                </div>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

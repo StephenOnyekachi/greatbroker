@@ -1,0 +1,134 @@
+
+{% extends 'extend/base.html' %}
+{% load static %}
+{% load humanize %}
+{% block content %}
+
+    <div>
+
+        {% include 'extend/dashboardtop.html' %}
+
+        <div class="container-float">
+            
+            {% include 'extend/dashboardmenu.html' %}
+
+            <div class="three-quater">
+                <div class="main-dashboard">
+                    <div class="box">
+                        <div class="box">
+                            <i class="fa fa-university opacity-logo"></i>
+                            <i class="fa fa-user p-logo"></i>
+                            <p class="p">
+                                user names
+                            </p>
+                            <h3 class="b-header">
+                                {{ sender.first_name }} {{ sender.last_name }}
+                            </h3>
+                        </div>
+                        <div class="box">
+                            <h3 class="s-header">preview receiver details</h3>
+                            <div class="card l-bg">
+                                <form action="" method="post" enctype="multipart/form-data">
+                                    {% csrf_token %}
+                                    <div class="input">
+                                        <p class="p">select transaction type</p>
+                                        <select name="type" id="">
+                                            <option value="sender">sender</option>
+                                            <option value="receiver">receiver</option>
+                                        </select>
+                                    </div>
+                                    <div class="input">
+                                        <p class="p">select user</p>
+                                        <select name="person" id="">
+                                            {% for user in users %}
+                                            <option value="{{ user.id }}">
+                                                {{ user.username }}: {{ user.first_name }} {{ user.last_name }}
+                                            </option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                    <div class="input">
+                                        <p class="p">amount</p>
+                                        <input type="number" placeholder="Amount" name="amount">
+                                    </div>
+                                    <div class="input">
+                                        <p class="p">transaction date</p>
+                                        <input type="date" name="date">
+                                    </div>
+                                    <div class="input">
+                                        <p class="p">description</p>
+                                        <textarea name="description" id="" placeholder="Description"></textarea>
+                                    </div>
+                                    <div class="input"> 
+                                        <div class="box-float">
+                                            <button class="p-bg">create</button>
+                                            <a href="{% url 'viewUser' sender.id %}" class="button d-bg">cancle</a>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="box">
+                            <h3 class="s-header">payment histories</h3>
+                            {% if transactions %}
+                                {% for transaction in transactions %}
+                                <div class="card l-bg">
+                                    <i class="fa fa-university opacity-logo"></i>
+                                    {% if transaction.receiver == sender %}
+                                        {% if transaction.status == 'Success' %}
+                                        <i class="fa fa-arrow-down s-logo"></i>
+                                        {% else %}
+                                        <i class="fa fa-arrow-down w-logo"></i>
+                                        {% endif %}
+                                        <p class="p s-t">
+                                            deposit from {{ transaction.receiver.first_name }}
+                                        </p>
+                                    {% elif transaction.sender == sender %}
+                                        {% if transaction.status == 'Success' %}
+                                        <i class="fa fa-arrow-up s-logo"></i>
+                                        {% else %}
+                                        <i class="fa fa-arrow-up w-logo"></i>
+                                        {% endif %}
+                                        <p class="p">
+                                            withdraw from {{ transaction.sender.first_name }}
+                                        </p>
+                                    {% endif %}
+                                    <p class="p s-t">
+                                        status:
+                                        {% if transaction.status == 'Success' %}
+                                        <i class="s-t-c">{{ transaction.status }}</i>
+                                        {% else %}
+                                        <i class="w-t-c">{{ transaction.status }}</i>
+                                        {% endif %}
+                                    </p>
+                                    <h3 class="s-header">
+                                        <i class="fa fa-dollar"></i>
+                                        {{ transaction.amount|intcomma }}
+                                    </h3>
+                                    <p class="p s-t">date: <i>{{ transaction.created_at }}</i></p>
+                                    <div style="padding: 10px 0px;">
+                                        <a href="{% url 'deleteUserTransactions' transaction.id %}" class="button d-bg">delete</a>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            {% else %}
+                            <div class="card p-bg">
+                                <div class="kyc">
+                                    <i class="fa fa-check s-logo"></i>
+                                    <p style="text-transform: capitalize;padding: 10px;">
+                                        {{ sender.first_name }} {{ sender.last_name }}
+                                    </p>
+                                    <p style="text-transform: capitalize;padding: 10px;">
+                                        dose not have any transaction history
+                                    </p>
+                                </div>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

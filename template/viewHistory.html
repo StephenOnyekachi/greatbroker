@@ -1,0 +1,146 @@
+
+{% extends 'extend/base.html' %}
+{% load humanize %}
+{% block content %}
+
+<style>
+@media print {
+    body * {
+        visibility: hidden;
+    }
+
+    #print-area, #print-area * {
+        visibility: visible;
+    }
+
+    #print-area {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+    }
+}
+</style>
+
+<div id="print-area">
+
+    <div style="
+        background:#ffffff;
+        padding:30px;
+        border-radius:15px;
+        box-shadow:0 5px 20px rgba(0,0,0,0.1);
+    ">
+        <div class="container" style="padding:40px 20px; max-width:600px; margin:auto;">
+            <div style="
+                background:#ffffff;
+                padding:30px;
+                border-radius:15px;
+                box-shadow:0 5px 20px rgba(0,0,0,0.1);
+            ">
+                <!-- Status Icon -->
+                <div style="text-align:center; margin-bottom:20px;">
+                    {% if transaction.status == 'Success' %}
+                        <i class="fa fa-check-circle" style="font-size:60px; color:green;"></i>
+                    {% elif transaction.status == 'Failed' %}
+                        <i class="fa fa-times-circle" style="font-size:60px; color:red;"></i>
+                    {% else %}
+                        <i class="fa fa-clock" style="font-size:60px; color:orange;"></i>
+                    {% endif %}
+                </div>
+                <!-- Amount -->
+                <h2 style="text-align:center; font-size:32px; margin-bottom:10px;">
+                    <i class="fa fa-dollar"></i>
+                    {{ transaction.amount|intcomma }}
+                </h2>
+                <p style="text-align:center; margin-bottom:30px; font-weight:bold;">
+                    {{ transaction.status }}
+                </p>
+                <hr>
+                <!-- Transaction Details -->
+                <div style="margin-top:20px; line-height:2;">
+
+                    <p><strong>Transaction ID:</strong> {{ transaction.transaction_id }}</p>
+
+                    <p>
+                        <strong>Type:</strong>
+                        {% if transaction.sender == user %}
+                            Withdrawal
+                        {% else %}
+                            Deposit
+                        {% endif %}
+                    </p>
+
+                    <p>
+                        <strong>From:</strong>
+                        {{ transaction.sender.first_name }} {{ transaction.sender.last_name }}
+                    </p>
+
+                    <p>
+                        <strong>To:</strong>
+                        {{ transaction.receiver.first_name }} {{ transaction.receiver.last_name }}
+                    </p>
+
+                    <p><strong>Account Number:</strong> {{ transaction.account_number }}</p>
+
+                    <p><strong>Description:</strong>
+                        {% if transaction.description %}
+                            {{ transaction.description }}
+                        {% else %}
+                            No description provided
+                        {% endif %}
+                    </p>
+
+                    <p><strong>Date:</strong> {{ transaction.created_at }}</p>
+
+                </div>
+                <hr style="margin:30px 0;">
+                <!-- Back Button -->
+                <div style="text-align:center;">
+                    <a href="{% url 'history' %}" style="
+                        background:#4CAF50;
+                        color:white;
+                        padding:10px 20px;
+                        border-radius:8px;
+                        text-decoration:none;
+                        font-weight:bold;
+                    ">
+                        Back to History
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="text-align:center; margin-top:15px;">
+        <button onclick="printReceipt()" style="
+            background:#000;
+            color:white;
+            padding:10px 20px;
+            border-radius:8px;
+            border:none;
+            font-weight:bold;
+            cursor:pointer;
+        ">
+            Print Receipt
+        </button>
+    </div>
+</div>
+
+<script>
+function printReceipt() {
+    var printContents = document.getElementById('print-area').innerHTML;
+    var originalContents = document.body.innerHTML;
+
+    document.body.innerHTML = printContents;
+    window.print();
+    document.body.innerHTML = originalContents;
+    location.reload(); // reload to restore page properly
+}
+</script>
+
+<script>
+function printReceipt() {
+    window.print();
+}
+</script>
+
+{% endblock %}

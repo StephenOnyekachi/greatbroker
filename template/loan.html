@@ -1,0 +1,127 @@
+
+{% extends 'extend/base.html' %}
+{% load static %}
+{% load humanize %}
+{% block content %}
+
+    <div>
+
+        {% include 'extend/dashboardtop.html' %}
+
+        <div class="container-float">
+            
+            {% include 'extend/dashboardmenu.html' %}
+
+            <div class="three-quater">
+                <div class="main-dashboard">
+                    <div class="box">
+                        <div class="box">
+                            <p class="p">
+                                Account No
+                            </p>
+                            <p class="p-u">
+                                {{ account_number }}
+                            </p>
+                            <h3 class="s-header">withdrawal</h3>
+                        </div>
+                        <div class="card l-bg">
+                            <i class="fa fa-university opacity-logo"></i>
+                            <p class="p">
+                                balance
+                            </p>
+                            <h3 class="b-header">
+                                <i class="fa fa-dollar"></i>
+                                {{ balance }}
+                            </h3>
+                        </div>
+                        <div class="box-float">
+                            <div class="card p-bg">
+                                <i class="fa fa-university opacity-logo"></i>
+                                <i class="fa fa-money p-logo"></i>
+                                <p class="p">
+                                    total loans
+                                </p>
+                                <h3 class="b-header">
+                                    <i class="fa fa-dollar"></i>
+                                    {{ total_loan|intcomma }}
+                                </h3>
+                            </div>
+                            <div class="card p-bg">
+                                <i class="fa fa-university opacity-logo"></i>
+                                <i class="fa fa-money p-logo"></i>
+                                <p class="p">
+                                    total loans
+                                </p>
+                                <h3 class="b-header">
+                                    <i class="fa fa-dollar"></i>
+                                    {{ paid_loan|intcomma }}
+                                </h3>
+                            </div>
+                        </div>
+                        <div class="box">
+                            <h3 class="s-header">loan histories</h3>
+                            {% if loan %}
+                                {% for loans in loan %}
+                                    <div class="card l-bg">
+                                        <i class="fa fa-university opacity-logo"></i>
+                                        {% if loans.approve %}
+                                        <i class="fa fa-money s-logo"></i><span class="p">approved</span>
+                                        {% else %}
+                                        <i class="fa fa-money w-logo"></i> <span class="p">pending</span>
+                                        {% endif %}
+                                        <p class="p s-t">
+                                            loan from {{ loans.loanner.first_name }} {{ loans.loanner.last_name }}
+                                        </p>
+                                        <p class="p s-t">
+                                            paid status:
+                                            {% if loans.paid %}
+                                            <i class="s-t-c">paid</i>
+                                            {% else %}
+                                            <i class="w-t-c">not paid</i>
+                                            {% endif %}
+                                        </p>
+                                        <h3 class="s-header">
+                                            <i class="fa fa-dollar"></i>
+                                            {{ loans.loan.amount|intcomma }}
+                                        </h3>
+                                        <p class="p s-t">borrowed on: <i>{{ loans.created_at }}</i></p>
+                                        <p class="p s-t">loan duration: <i>{{ loans.loan.duration }}</i></p>
+                                    </div>
+                                {% endfor %}
+                            {% else %}
+                            <div class="card p-bg">
+                                <div class="kyc">
+                                    <i class="fa fa-check s-logo"></i>
+                                    <p style="text-transform: capitalize;padding: 10px;">
+                                        {{ user.first_name }} {{ user.last_name }}
+                                    </p>
+                                    <p style="text-transform: capitalize;padding: 10px;">
+                                        you do not have any loan history
+                                    </p>
+                                </div>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="varify-cover">
+                <div class="varify-card">
+                    <i class="fa fa-check s-logo"></i>
+                    <p class="l-p">
+                        your loan application of
+                    </p>
+                    <h3 class="l-b-header">
+                        <i class="fa fa-dollar"></i>
+                        500.00
+                    </h3>
+                    <p class="l-p">
+                        was successfull
+                    </p>
+                    <button class="button s-bg">complete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,112 @@
+
+{% extends 'extend/base.html' %}
+{% load static %}
+{% block content %}
+
+    <div>
+        
+        {% include 'extend/dashboardtop.html' %}
+
+        <div class="container-float">
+            
+            {% include 'extend/dashboardmenu.html' %}
+
+            <div class="three-quater">
+                <div class="main-dashboard">
+                    <div class="box">
+                        <div class="box">
+                            <p class="p">
+                                Account No
+                            </p>
+                            <p class="p-u">
+                                {{ account_number }}
+                            </p>
+                        </div>
+                        <div class="box-float">
+                            <div class="box">
+                                <p class="p-u">
+                                    username
+                                </p>
+                                <p class="p">
+                                    {{ user.username }}
+                                </p>
+                            </div>
+                            <div class="box">
+                                <p class="p-u">
+                                    names
+                                </p>
+                                <p class="p">
+                                    {{ user.first_name }} {{ user.last_name }}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="box">
+                            <h3 class="s-header">KYC</h3>
+                        </div>
+                        {% if kyc.kyc %}
+                        <div class="card p-bg">
+                            <div class="kyc">
+                                <i class="fa fa-check s-logo"></i>
+                                <p style="text-transform: capitalize;padding: 10px;">
+                                    {{ user.first_name }} {{ user.last_name }}
+                                </p>
+                                <p style="text-transform: capitalize;padding: 10px;">
+                                    you KYC have been varified successfully
+                                </p>
+                            </div>
+                        </div>
+                        {% else %}
+                        <div class="card l-bg">
+                            <form action="" method="post" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                <div class="input">
+                                    <p class="p">upload profile piture</p>
+                                    <label for="profilePicture">
+                                        <i class="fa fa-camera d-logo"></i>
+                                    </label>
+                                    <input type="file" id="profilePicture" hidden name="image" required>
+                                </div>
+                                <div class="input">
+                                    <p class="p">date of birth</p>
+                                    <input type="date" placeholder="Date of Birth" name="date" required>
+                                </div>
+                                <div class="input">
+                                    <p class="p">phone number</p>
+                                    <input type="text" placeholder="Phone Number" name="phone" required>
+                                </div>
+                                <div class="input">
+                                    <p class="p">gender</p>
+                                    <select name="gender" id="" required>
+                                        <option value="">selet gender</option>
+                                        <option value="male">male</option>
+                                        <option value="female">female</option>
+                                        <option value="custom">custom</option>
+                                    </select>
+                                </div>
+                                <div class="input">
+                                    <p class="p">transaction pin</p>
+                                    <input type="number" placeholder="Pin" name="pin" required>
+                                </div>
+                                <div class="input">
+                                    <p class="p">country</p>
+                                    <input type="text" placeholder="Country" name="country" required>
+                                </div>
+                                <div class="input">
+                                    <p class="p">house address</p>
+                                    <textarea name="address" id="" placeholder="Address" required></textarea>
+                                </div>
+                                <div class="input">
+                                    <div class="box-float">
+                                        <button class="p-bg">varify KYC</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

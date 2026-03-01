@@ -1,0 +1,90 @@
+
+{% extends 'extend/base.html' %}
+{% load static %}
+{% block content %}
+
+{% include 'extend/indexmenu.html' %}
+<div>
+    <section>
+        <div class="home-intro">
+            <div class="home-intro-box">
+                <h1>great broker, Smart Investing. Secure Transactions. Real Growth.</h1>
+                <p>
+                    Thousands of users trust GreatBroker to manage their digital transactions and investments. We focus on security, 
+                    speed, and reliability so our users can focus on growing their finances.
+                </p>
+                <br>
+                <p>
+                    Take advantage of market opportunities and strategic trading designed 
+                    to help investors maximize potential profits.
+                </p>
+                <div style="margin-top: 20px;">
+                    <a href="" class="achor-active"> Get Started</a>
+                    <a href="" class="achor-border"> Login to Dashboard</a>
+                </div>
+            </div>
+            <div class="home-intro-box">
+                <img src="{% static './images/down.png' %}" alt="image">
+            </div>
+        </div>
+    </section>
+    <section>
+        <div class="home-why-us-title">
+            <h3>Out Features</h3>
+        </div>
+        <div class="home-why-us-box">
+            <div class="home-why-us-card zoom-in">
+                <div class="home-why-us-head">
+                    <h3>Bank-Level Security</h3>
+                </div>
+                <div class="home-why-us-text">
+                    <hr>
+                    <p>
+                        We use strong encryption and advanced security systems to protect 
+                        user accounts, transactions, and personal information.
+                    </p>
+                </div>
+            </div>
+            <div class="home-why-us-card zoom-in">
+                <div class="home-why-us-head">
+                    <h3>Reliable Platform</h3>
+                </div>
+                <div class="home-why-us-text">
+                    <hr>
+                    <p>
+                        Our infrastructure is built for performance and stability, 
+                        ensuring that users can access their accounts anytime.
+                    </p>
+                </div>
+            </div>
+            <div class="home-why-us-card zoom-in">
+                <div class="home-why-us-head">
+                    <h3>Trusted by Users</h3>
+                </div>
+                <div class="home-why-us-text">
+                    <hr>
+                    <p>
+                        Our growing community of investors and users continues to trust our 
+                        platform for transparent and secure financial services.
+                    </p>
+                </div>
+            </div>
+            <div class="home-why-us-card zoom-in">
+                <div class="home-why-us-head">
+                    <h3>Competitive Rates</h3>
+                </div>
+                <div class="home-why-us-text">
+                    <hr>
+                    <p>
+                        We offer competitive transaction and exchange rates 
+                        designed to give users the best value for their money.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+{% include 'extend/footer.html' %}
+
+{% endblock %}

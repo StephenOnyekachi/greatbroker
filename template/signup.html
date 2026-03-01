@@ -1,0 +1,100 @@
+
+{% extends 'extend/base.html' %}
+{% load static %}
+{% block content %}
+
+    {% include 'extend/indexmenu.html' %}
+
+    <section>
+        <div>
+            <div class="auths">
+                <div>
+                    <div>
+                        <h3 class="ligh-title">signup page</h3>
+                    </div>
+                    <br>
+                    <div>
+                        <i class="fa fa-key warn-icon"></i>
+                        <h3 class="warn-title">security warnnings</h3>
+                        <p class="ligh-p">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda, 
+                            neque exercitationem voluptate dolor explicabo eum praesentium ad porro ex 
+                            dignissimos alias, eius, vitae sed excepturi amet mollitia commodi quasi asperiores quidem 
+                            animi! Quisquam quas quos molestiae ratione et accusamus aperiam natus expedita repudiandae, 
+                            obcaecati accusantium dolorem odio voluptate autem voluptates blanditiis. Praesentium, 
+                            nesciunt rerum cupiditate nemo soluta a aspernatur odio dolores, nobis quam repudiandae!
+                        </p>
+                    </div>
+                    <div class="auths-box zoom-in">
+                        <div class="auths-card">
+                            <div>
+                                {% if messages %}
+                                    {% for message in messages %}
+                                        <div class="info-m">
+                                            <h5>info</h5>
+                                            <p>{{ message }}</p>
+                                        </div>
+                                    {% endfor %}
+                                {% endif %}
+                                <form action="" method="post" enctype="multipart/form-data">
+                                    {% csrf_token %}
+                                    <div>
+                                        <p class="ligh-p">username</p>
+                                        <div class="form-div">
+                                            <input type="text" placeholder="Username" name="username">
+                                            <i class="fa fa-user"></i>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <p class="ligh-p">first name</p>
+                                        <div class="form-div">
+                                            <input type="text" placeholder="First Name" name="first_name">
+                                            <i class="fa fa-user"></i>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <p class="ligh-p">other names</p>
+                                        <div class="form-div">
+                                            <input type="text" placeholder="Other Names" name="last_name">
+                                            <i class="fa fa-user"></i>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <p class="ligh-p">email</p>
+                                        <div class="form-div">
+                                            <input type="text" placeholder="Mail" name="mail">
+                                            <i class="fa fa-envelope"></i>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <p class="ligh-p">password</p>
+                                        <div class="form-div">
+                                            <input type="password" placeholder="Create Password" class="pass" name="password1">
+                                            <i class="fa fa-eye toggle"></i>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <p class="ligh-p">confirm password</p>
+                                        <div class="form-div">
+                                            <input type="password" placeholder="Confirm Password" class="pass" name="password2">
+                                            <i class="fa fa-eye toggle"></i>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <button class="button">create account</button>
+                                    </div>
+                                    <div>
+                                        <p class="ligh-p">Have an accout <a href="{% url 'login' %}">Login Here</a></p>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {% include 'extend/footer.html' %}
+
+{% endblock %}

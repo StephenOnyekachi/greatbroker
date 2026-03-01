@@ -1,0 +1,34 @@
+
+{% load static %}
+
+<section>
+    <div class="top-menu">
+        <div class="menu-logo">
+            <img src="{% static './images/logo.png' %}" alt="logo">
+            <h3>Great Broker</h3>
+        </div>
+        <div class="content-menu">
+            <a href="{% url 'index' %}" class="bottom-effect">home</a>
+            <a href="{% url 'about' %}" class="bottom-effect">about</a>
+            <a href="{% url 'features' %}" class="bottom-effect">features</a>
+            <a href="{% url 'contact' %}" class="bottom-effect">contact</a>
+        </div>
+        <div class="log-menu">
+            <a href="{% url 'login' %}">login</a>
+            <a href="{% url 'signup' %}" class="log-menu-active">sign up</a>
+        </div>
+        <div class="menu-bar">
+            <i class="fa fa-bars"></i>
+        </div>
+    </div>
+    <div class="media-menu">
+        <div class="media-menu-con">
+            <a href="{% url 'index' %}" class="bottom-effect">home</a>
+            <a href="{% url 'about' %}" class="bottom-effect">about</a>
+            <a href="{% url 'features' %}" class="bottom-effect">features</a>
+            <a href="{% url 'contact' %}" class="bottom-effect">contact</a>
+            <a href="{% url 'login' %}">log in</a>
+            <a href="{% url 'signup' %}" class="log-menu-active">sign up</a>
+        </div>
+    </div>
+</section>

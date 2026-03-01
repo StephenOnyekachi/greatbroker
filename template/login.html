@@ -1,0 +1,75 @@
+
+{% extends 'extend/base.html' %}
+{% load static %}
+{% block content %}
+
+    {% include 'extend/indexmenu.html' %}
+
+    <section>
+        <div>
+            <div class="auths">
+                <div>
+                    <div>
+                        <h3 class="ligh-title">login page</h3>
+                    </div>
+                    <br>
+                    <div>
+                        <i class="fa fa-key warn-icon"></i>
+                        <h3 class="warn-title">security warnnings</h3>
+                        <p class="ligh-p">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda, 
+                            neque exercitationem voluptate dolor explicabo eum praesentium ad porro ex 
+                            dignissimos alias, eius, vitae sed excepturi amet mollitia commodi quasi asperiores quidem 
+                            animi! Quisquam quas quos molestiae ratione et accusamus aperiam natus expedita repudiandae, 
+                            obcaecati accusantium dolorem odio voluptate autem voluptates blanditiis. Praesentium, 
+                            nesciunt rerum cupiditate nemo soluta a aspernatur odio dolores, nobis quam repudiandae!
+                        </p>
+                    </div>
+                    <div class="auths-box zoom-in">
+                        <div class="auths-card">
+                            <div>
+                                {% if messages %}
+                                    {% for message in messages %}
+                                        <div class="info-m">
+                                            <h5>info</h5>
+                                            <p>{{ message }}</p>
+                                        </div>
+                                    {% endfor %}
+                                {% endif %}
+                                <form action="" method="post" enctype="multipart/form-data">
+                                    {% csrf_token %}
+                                    <div>
+                                        <p class="ligh-p">username</p>
+                                        <div class="form-div">
+                                            <input type="text" placeholder="Enter Your Username" name="username">
+                                            <i class="fa fa-user"></i>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <p class="ligh-p">password</p>
+                                        <div class="form-div">
+                                            <input type="password" placeholder="Enter Your Password" name="password" class="pass">
+                                            <i class="fa fa-eye toggle"></i>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <button class="button">login</button>
+                                    </div>
+                                    <div>
+                                        <p class="warn-p">Forgotten Password <a href="">Rest Password</a></p>
+                                    </div>
+                                    <div>
+                                        <p class="ligh-p">Create new accout <a href="{% url 'signup' %}">Create New Accout</a></p>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {% include 'extend/footer.html' %}
+
+{% endblock %}
