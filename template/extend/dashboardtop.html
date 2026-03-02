@@ -48,7 +48,7 @@
         <div class="user-info">
             <a href="">
                 {% if picture %}
-                    <img src="{{ picture.url }}?v={{ user.id }}" alt="image">
+                    <img src="{{ picture.url }}?v={{ user.profile.last_login }}" alt="image">
                 {% else %}
                     <img src="{% static './images/user_icon.png' %}" alt="image">
                 {% endif %}

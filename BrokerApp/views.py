@@ -305,13 +305,14 @@ def Settings(request):
 
 @login_required(login_url='login')
 def UpdatePicture(request):
-    profile = Profile.objects.get(user=request.user)
+    profile = request.user.profile
     if request.method == "POST":
         image = request.FILES.get("profilePicture")
-        profile.profile_picture=image
-        profile.save()
-        messages.success(request, f'{request.user.username} your profile picture was updated successfully')
-        return redirect('setting')
+        if image:
+            profile.profile_picture = image
+            profile.save()
+            messages.success(request, "Profile picture updated successfully")
+        return redirect("setting")
     
 @login_required(login_url='login')
 def UpdatePin(request):
