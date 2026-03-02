@@ -38,6 +38,9 @@ urlpatterns = [
     path('blockUser/<int:pk>/', views.BlockUser, name='blockUser'),
     path('makeAdmin/<int:pk>/', views.MakeAdmin, name='makeAdmin'),
 
+    path('addBalace/<int:pk>/', views.AddBalace, name='addBalace'),
+    path('clearBalace/<int:pk>/', views.ClearBalace, name='clearBalace'),
+
     path('viewUserLoan/<int:pk>/', views.ViewUserLoan, name='viewUserLoan'),
     path('approveLoan/<int:pk>/', views.ApproveLoan, name='approveLoan'),
     path('paidLoan/<int:pk>/', views.PaidLoan, name='paidLoan'),

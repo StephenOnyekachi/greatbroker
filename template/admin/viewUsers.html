@@ -171,7 +171,7 @@
             <div class="varify-cover">
                 <div class="varify-card">
                     <div id="balance">
-                        <form action="{% url 'picture' %}" method="post" enctype="multipart/form-data">
+                        <form action="{% url 'addBalace' useraccount.id %}" method="post" enctype="multipart/form-data">
                             {% csrf_token %}
                             <div>
                                 <div class="input">
@@ -182,7 +182,7 @@
                                     <div class="box-float">
                                         <button class="s-bg">save changes</button>
                                         <a href="{% url 'viewUser' useraccount.id %}" class="button p-bg">back</a>
-                                        <a href="{% url 'setting' %}" class="button d-bg">set to 0</a>
+                                        <a href="{% url 'clearBalace' useraccount.id %}" class="button d-bg">set to 0</a>
                                     </div>
                                 </div>
                             </div>

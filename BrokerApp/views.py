@@ -218,7 +218,7 @@ def Dashboard(request):
         Q(investor=user) and Q(due=False) 
     )
     if not wallet.pin:
-        messages.warning(request, "You have not set your wallet pin yet. Please set it in Settings before making any payments.")
+        messages.warning(request, "You have not set your wallet pin yet. Please set it in your KYC before making any payments.")
     context = {
         'balance': balance,
         'account_number': wallet.account_number,
@@ -761,6 +761,28 @@ def BlockUser(request,pk):
     profile.save()
     messages.success(request, f'{useraccount.username}, accoun was block')
     return redirect('viewUser', pk=useraccount.id)
+
+@login_required(login_url='login')
+@CheckUser
+def AddBalace(request,pk):
+    useraccount = User.objects.get(id=pk)
+    if request.method == 'POST':
+        balance = request.POST.get('balance')
+        wallet = Wallet.objects.get(user=useraccount)
+        if wallet:
+            wallet.balance += int((balance))
+            wallet.save()
+            return redirect('viewUser', pk=wallet.user.id)
+        
+@login_required(login_url='login')
+@CheckUser
+def ClearBalace(request,pk):
+    useraccount = User.objects.get(id=pk)
+    wallet = Wallet.objects.get(user=useraccount)
+    if wallet:
+        wallet.balance = 0
+        wallet.save()
+        return redirect('viewUser', pk=wallet.user.id)
 
 @login_required(login_url='login')
 @CheckUser
