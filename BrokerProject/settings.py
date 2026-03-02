@@ -97,29 +97,21 @@ WSGI_APPLICATION = 'BrokerProject.wsgi.application'
 # }
 # settings for postgresql database
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': config('DB_NAME'),
-        'USER': config('DB_USER'),
-        'PASSWORD': config('DB_PASSWORD'),
-        'HOST': config('DB_HOST'),
-        'PORT': config('DB_PORT', cast=int),
-    }
-}
-# DATABASES = {
-#     'default': dj_database_url.config(
-#         default='postgres://postgres:Stephen12%23@localhost:5432/GreateBroker'
-#     )
-# }
-DATABASES = {
     'default': dj_database_url.config(
-        default=config('DATABASE_URL')
+        default=config('DATABASE_URL', default='sqlite:///db.sqlite3'),
+        conn_max_age=600
     )
 }
-DATABASES = {
-    'default': dj_database_url.config(default=os.getenv("DATABASE_URL"))
-}
-
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': config('DB_NAME'),
+#         'USER': config('DB_USER'),
+#         'PASSWORD': config('DB_PASSWORD'),
+#         'HOST': config('DB_HOST'),
+#         'PORT': config('DB_PORT', cast=int),
+#     }
+# }
 # rest framework authenticatio
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
