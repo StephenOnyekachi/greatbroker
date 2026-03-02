@@ -215,7 +215,7 @@ def Dashboard(request):
     ).order_by('-created_at')
     # Check if user has not set a pin
     investment = Investment.objects.filter( 
-        Q(investor=user) and Q(due=False) 
+        Q(investor=user) & Q(due=False) 
     )
     if not wallet.pin:
         messages.warning(request, "You have not set your wallet pin yet. Please set it in your KYC before making any payments.")
